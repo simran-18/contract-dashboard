@@ -6,6 +6,7 @@ const handleModeToggle=()=>
 {
     setIsDarkMode(prev=>!prev);
     document.body.classList.toggle("dark");
+    localStorage.setItem("theme",!isDarkMode?'dark':'light')
 }
 
   return (

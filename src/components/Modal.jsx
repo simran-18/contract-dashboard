@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { statuses } from "../database/mockDb";
 
 export const Modal = ({ contract, onClose, onSave }) => {
   const [form, setForm] = useState(contract || {});
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  // Handle theme change and persist it in localStorage
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.body.setAttribute("data-theme", theme); // Update theme in DOM
+  }, [theme]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -14,12 +21,18 @@ export const Modal = ({ contract, onClose, onSave }) => {
   };
 
   return (
-    <div  className="fixed inset-0 bg-white bg-opacity-50 flex items-center justify-center">
-      <div  className="p-6 rounded shadow-lg  w-1/3" >
-      <div className="text-right cursor-pointer" onClick={onClose}>X</div>
+    <div className="fixed inset-0 bg-gray-400 bg-opacity-50 flex items-center justify-center">
+      <div
+        className={`p-6 rounded shadow-lg w-1/3 ${
+          theme === "dark" ? "bg-black text-white" : "bg-white text-black"
+        }`}
+      >
+        <div className="text-right cursor-pointer" onClick={onClose}>
+          X
+        </div>
         <h2 className="text-lg font-bold mb-4">Edit Contract</h2>
         <form onSubmit={handleSubmit}>
-          <label className="block mb-2">
+          <label className={`block mb-2 ${theme === "dark" ? "text-white" : "text-black"}`}>
             Client Name:
             <input
               name="clientName"
@@ -28,7 +41,7 @@ export const Modal = ({ contract, onClose, onSave }) => {
               className="p-2 border rounded w-full"
             />
           </label>
-          <label className="block mb-4">
+          <label className={`block mb-4 ${theme === "dark" ? "text-white" : "text-black"}`}>
             Status:
             <select
               name="status"
@@ -59,6 +72,7 @@ export const Modal = ({ contract, onClose, onSave }) => {
             </button>
           </div>
         </form>
+       
       </div>
     </div>
   );

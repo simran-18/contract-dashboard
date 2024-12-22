@@ -7,6 +7,7 @@ export const ContractsProvider = ({ children }) => {
   const [contracts, setContracts] = useState(mockContracts);
 
   const updateContract = (updatedContract) => {
+    console.log("updatedContract::",updatedContract)
     setContracts((prev) =>
       prev?.map((contract) =>
         contract?.id === updatedContract?.id ? updatedContract : contract
