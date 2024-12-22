@@ -16,9 +16,9 @@ const handleModeToggle=()=>
       aria-label="Toggle Dark Mode"
     >
       {isDarkMode ? (
-        <span className="text-sm font-medium ">🌙</span>
+        <span className="text-sm font-medium ">🌙 In Dark Mode</span>
       ) : (
-        <span className="text-sm font-medium ">☀️</span>
+        <span className="text-sm font-medium ">☀️ In Light Mode</span>
       )}
     </button>
   );
